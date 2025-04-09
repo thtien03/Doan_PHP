@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 17, 2022 at 04:57 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Generation Time: Apr 09, 2025 at 01:19 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
- 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -26,21 +28,21 @@
 --
 
 CREATE TABLE `banner` (
-  `id` int(11) NOT NULL,
-  `caption` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `content` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `photo` varchar(250) COLLATE utf8_bin DEFAULT NULL,
+  `id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `caption` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `content` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `photo` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `banner`
 --
 
 INSERT INTO `banner` (`id`, `caption`, `content`, `photo`, `status`, `create_at`) VALUES
-(2, 'Mùa hè sôi động', 'Nhanh chân nào bạn tôi ơi', 'slide2.jpg', 1, '2022-07-07 00:00:00'),
-(3, 'Mua 1 tặng 1', 'Nhanh chân nào bạn tôi ơi', 'slide3.jpg', 1, '2022-07-07 00:00:00');
+('2', 'Mùa hè sôi động', 'Nhanh chân nào bạn tôi ơi', 'slide1744137879.jpg', 1, '2025-04-08 18:44:39'),
+('3', 'Mua 1 tặng 1', 'Nhanh chân nào bạn tôi ơi', 'slide3.jpg', 1, '2022-07-07 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -49,20 +51,22 @@ INSERT INTO `banner` (`id`, `caption`, `content`, `photo`, `status`, `create_at`
 --
 
 CREATE TABLE `brand` (
-  `brand_id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `status` int(1) NOT NULL,
+  `brand_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `status` int NOT NULL,
   `created_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `brand`
 --
 
 INSERT INTO `brand` (`brand_id`, `name`, `status`, `created_at`) VALUES
-(1, 'Apple', 1, '2022-03-21 00:00:00'),
-(2, 'Samsung', 1, '2022-04-07 15:24:28'),
-(3, 'Oppo', 2, '2022-04-07 15:24:34');
+('1', 'Apple', 1, '2022-03-21 00:00:00'),
+('2', 'Samsung', 1, '2022-04-07 15:24:28'),
+('20250408-231847-0mcor-93qfy', 'Oppo', 1, '2025-04-08 23:18:47'),
+('20250409-020107-avlb3-8ods0', 'Xiaomi', 1, '2025-04-09 02:01:07'),
+('3', 'Oppo', 2, '2022-04-07 15:24:34');
 
 -- --------------------------------------------------------
 
@@ -71,22 +75,22 @@ INSERT INTO `brand` (`brand_id`, `name`, `status`, `created_at`) VALUES
 --
 
 CREATE TABLE `category` (
-  `category_id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `status` int(1) NOT NULL,
+  `category_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `status` int NOT NULL,
   `created_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`category_id`, `name`, `status`, `created_at`) VALUES
-(1, 'Điện thoại', 1, '2022-03-21 00:00:00'),
-(2, 'Máy tính bảng', 0, '2022-03-21 00:00:00'),
-(3, 'Đồng hồ', 0, '2022-03-21 00:00:00'),
-(4, 'Laptop', 0, '2022-03-21 00:00:00'),
-(5, 'Phụ kiện', 0, '2022-03-21 00:00:00');
+('1', 'Điện thoại', 1, '2022-03-21 00:00:00'),
+('2', 'Máy tính bảng', 1, '2025-04-08 16:17:39'),
+('3', 'Đồng hồ', 0, '2022-03-21 00:00:00'),
+('4', 'Laptop', 0, '2022-03-21 00:00:00'),
+('5', 'Phụ kiện', 0, '2025-04-08 16:18:00');
 
 -- --------------------------------------------------------
 
@@ -95,21 +99,21 @@ INSERT INTO `category` (`category_id`, `name`, `status`, `created_at`) VALUES
 --
 
 CREATE TABLE `color` (
-  `color_id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `code` varchar(20) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `color_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `color`
 --
 
 INSERT INTO `color` (`color_id`, `name`, `code`) VALUES
-(1, 'Đen', ''),
-(2, 'Trắng', ''),
-(3, 'Đỏ', ''),
-(4, 'Vàng', ''),
-(8, 'Xanh', '');
+('1', 'Đen', ''),
+('2', 'Trắng', ''),
+('3', 'Đỏ', ''),
+('4', 'Vàng', ''),
+('8', 'Xanh', '');
 
 -- --------------------------------------------------------
 
@@ -118,13 +122,19 @@ INSERT INTO `color` (`color_id`, `name`, `code`) VALUES
 --
 
 CREATE TABLE `comment` (
-  `comment_id` int(11) NOT NULL,
-  `customer_id` int(11) DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL,
-  `feedback_id` int(11) NOT NULL,
-  `content` varchar(255) NOT NULL,
+  `comment_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `customer_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `product_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `customer_id`, `product_id`, `content`, `created_at`) VALUES
+('20250409-134017-ym6ec-k5xw3', '20250409-131400-qy2px-8kboc', '14', 'sản phẩm tốt', '2025-04-09 13:40:17');
 
 -- --------------------------------------------------------
 
@@ -133,25 +143,26 @@ CREATE TABLE `comment` (
 --
 
 CREATE TABLE `customer` (
-  `customer_id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `phone` char(10) COLLATE utf8_bin DEFAULT NULL,
+  `customer_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `phone` char(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `birthday` datetime DEFAULT NULL,
   `gender` tinyint(1) DEFAULT NULL,
-  `email` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `address` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  `password` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `email` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `address` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `password` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`customer_id`, `name`, `phone`, `birthday`, `gender`, `email`, `address`, `password`, `status`, `created_at`) VALUES
-(1, 'Gia Phuc', '0364536930', '2022-04-03 00:00:00', 1, 'a@gmail.com', '34 Hai Bà Trưng', '202cb962ac59075b964b07152d234b70', 1, '0000-00-00 00:00:00'),
-(24, 'Phan Minh Hùng', '0899933868', '0000-00-00 00:00:00', 0, 'b@gmail.com', '695 xô viết nghệ tĩnh', '202cb962ac59075b964b07152d234b70', 1, '2022-04-14 03:39:10');
+('20250408-223215-0wuei-3ry8b', 'Trần Hữu Tiến', '0823746296', '2025-04-08 22:32:15', 0, 'thtien@gmail.com', 'Tiến hóa, Tuyên Hóa, Quàn Bình', '9c9e32d9319bbc48345289fb7bc7ec1a', 1, '2025-04-08 22:32:15'),
+('20250409-023851-37nhe-a5vy6', 'User', '0826584751', '2025-04-09 02:38:51', 0, 'user@gmail.com', '563 Tô Ngọc Vân,Tam Phú,Thủ Đức', '6ad14ba9986e3615423dfca256d04e3f', 1, '2025-04-09 02:38:51'),
+('20250409-131400-qy2px-8kboc', 'Nguyễn Văn Nguyên', '0865936174', '2025-04-09 13:14:00', 0, 'nguyennv2k3@gmail.com', 'HCM', 'd2139a03f7710dc31d8cd118cac89f93', 1, '2025-04-09 13:14:00');
 
 -- --------------------------------------------------------
 
@@ -160,25 +171,27 @@ INSERT INTO `customer` (`customer_id`, `name`, `phone`, `birthday`, `gender`, `e
 --
 
 CREATE TABLE `employee` (
-  `employee_id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `employee_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `gender` tinyint(1) DEFAULT NULL,
   `birthday` datetime DEFAULT NULL,
-  `phone` char(10) COLLATE utf8_bin DEFAULT NULL,
-  `email` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `password` varchar(250) COLLATE utf8_bin DEFAULT NULL,
+  `phone` char(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `email` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `password` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
-  `role_id` int(11) NOT NULL,
+  `role_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `created_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`employee_id`, `name`, `gender`, `birthday`, `phone`, `email`, `password`, `status`, `role_id`, `created_at`) VALUES
-(1, 'giaphuc', 1, '2022-04-18 00:00:00', '0345693162', 'a@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 1, '2022-04-05 14:40:24'),
-(2, 'Minh Hung', 1, '2022-04-18 00:00:00', '0345693169', 'abc@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 1, '2022-04-05 14:40:24');
+('1', 'huutien', 1, '2003-04-05 00:00:00', '0823746296', 'huutien6296@gmail.com', '0192023a7bbd73250516f069df18b500', 0, '1', '2022-04-05 14:40:24'),
+('1001', 'Hữu Tiến', 1, '2003-04-18 00:00:00', '0865936174', 'huutien@gmail.com', '0192023a7bbd73250516f069df18b500', 0, '1', '2025-04-06 14:40:24'),
+('1002', 'Hữu Tiến', 1, '2003-04-18 00:00:00', '0865936174', 'huutien@gmail.com', '0192023a7bbd73250516f069df18b500', 0, '1', '2025-04-06 14:40:24'),
+('1021', 'Hữu Tiến', 1, '2003-04-18 00:00:00', '0865936174', 'huutien@gmail.com', '0192023a7bbd73250516f069df18b500', 0, '1', '2025-04-06 14:40:24');
 
 -- --------------------------------------------------------
 
@@ -187,20 +200,13 @@ INSERT INTO `employee` (`employee_id`, `name`, `gender`, `birthday`, `phone`, `e
 --
 
 CREATE TABLE `feedback` (
-  `feedback_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `caption` varchar(100) NOT NULL,
-  `content` varchar(255) NOT NULL,
+  `feedback_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `customer_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `caption` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`feedback_id`, `customer_id`, `caption`, `content`, `status`, `created_at`) VALUES
-(3, 1, 'Hài lòng', 'Trên cả tuyệt vời', 1, '2022-04-04 00:00:00');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -209,9 +215,9 @@ INSERT INTO `feedback` (`feedback_id`, `customer_id`, `caption`, `content`, `sta
 --
 
 CREATE TABLE `liked` (
-  `customer_id` int(11) NOT NULL,
-  `feedback_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `customer_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `feedback_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -220,25 +226,61 @@ CREATE TABLE `liked` (
 --
 
 CREATE TABLE `orderdetail` (
-  `orderdetail_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `orders_id` int(11) NOT NULL,
-  `color_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `orderdetail_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `product_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `orders_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `color_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `quantity` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orderdetail`
 --
 
 INSERT INTO `orderdetail` (`orderdetail_id`, `product_id`, `orders_id`, `color_id`, `quantity`) VALUES
-(24, 10, 83, 1, 2),
-(25, 11, 83, 2, 1),
-(26, 10, 84, 1, 2),
-(27, 10, 85, 1, 2),
-(28, 10, 86, 1, 2),
-(32, 1, 90, 1, 1),
-(33, 1, 91, 1, 2);
+('20250405-223505-wvlu0-tjn75', '1', '20250405-223505-yfnbt-lz28x', '4', 2),
+('20250406-205442-bjw1v-r3kd7', '1', '20250406-205442-0mrzi-a4f9j', '4', 1),
+('20250406-223627-nzjax-ht5lw', '1', '20250406-223627-ypuzk-bctvh', '4', 1),
+('20250406-223917-n5wrv-ypfes', '19', '20250406-223917-8zxni-dlbt2', '2', 1),
+('20250406-224248-pwu7d-ti4lq', '1', '20250406-224248-d49yu-zvqxe', '4', 1),
+('20250406-224435-q72o3-cnjf5', '19', '20250406-224435-9laeq-t7yon', '2', 1),
+('20250406-224814-nokeh-pcy0d', '19', '20250406-224814-bjh8u-v6rcw', '2', 1),
+('20250406-225103-jnmlx-yhfsi', '19', '20250406-225103-ahci9-7fgj4', '2', 1),
+('20250406-225230-gi17v-42hu9', '19', '20250406-225230-t0hkg-eso52', '2', 1),
+('20250406-225927-ve4ij-spocy', '1', '20250406-225927-ue97b-awty8', '4', 1),
+('20250406-230630-hgo20-8ptw3', '19', '20250406-230630-nbdse-3cyxt', '2', 1),
+('20250406-230652-hirvn-60ykx', '19', '20250406-230652-yr7j3-5pkha', '2', 1),
+('20250406-230748-4vgrp-7je89', '19', '20250406-230748-qde9v-uyi53', '2', 1),
+('20250406-230851-tqnv5-hdleu', '9', '20250406-230851-peig4-qy537', '2', 1),
+('20250406-231146-ez6c3-pfukw', '19', '20250406-231146-t6i2m-qv30z', '2', 1),
+('20250406-231202-7c9x6-n1wit', '19', '20250406-231202-pq73g-id8ot', '2', 2),
+('20250406-231643-6fd2n-skugp', '19', '20250406-231643-hqivd-1wj5l', '2', 3),
+('20250406-232001-gvtm1-op0a7', '19', '20250406-232001-ml0or-wa49j', '2', 1),
+('20250406-232237-6vntj-79zcp', '19', '20250406-232237-cun07-fz6k8', '2', 1),
+('20250406-232447-d82uk-tb4vn', '19', '20250406-232447-im7qg-ocwed', '2', 2),
+('20250406-233010-kufgo-tie42', '19', '20250406-233010-zbcyd-gha0i', '2', 3),
+('20250406-233057-1jrd0-2tnul', '2', '20250406-233057-lqnxw-1f28j', '1', 1),
+('20250406-233748-ioct8-msl5e', '19', '20250406-233748-sdo1z-x8wfe', '2', 1),
+('20250406-233748-tig9k-enp2l', '2', '20250406-233748-sdo1z-x8wfe', '1', 1),
+('20250406-234130-psowv-l5tag', '2', '20250406-234130-1aqen-kflbh', '1', 1),
+('20250406-234328-hcmkn-9b3w0', '2', '20250406-234328-b38du-6wkh9', '1', 1),
+('20250406-234400-i6xqa-c8mhl', '19', '20250406-234400-e6x9q-w7fj1', '2', 1),
+('20250406-234936-sqlbo-yn7r5', '19', '20250406-234936-n7ay2-gjdh3', '2', 2),
+('20250406-235322-uaj57-2qldk', '19', '20250406-235322-m8gq1-ar3p6', '2', 2),
+('20250406-235736-c25u4-1nrgy', '30', '20250406-235736-th8fn-was10', '1', 1),
+('20250408-223253-93v7u-8hycx', '19', '20250408-223253-z9ms5-k84rl', '2', 1),
+('20250408-223712-2iuxm-86vps', '19', '20250408-223712-4vy1g-i7923', '2', 1),
+('20250409-024018-84e0i-rh9d3', '15', '20250409-024018-qdhpb-a97i0', '3', 2),
+('20250409-132004-w7bxj-iz5qs', '12', '20250409-132004-05c9x-73sgi', '3', 1),
+('20250409-132434-uaxyp-v0t61', '14', '20250409-132434-4w8b7-3sqcm', '2', 1),
+('20250409-132459-9rnwi-d8csz', '14', '20250409-132459-pdnbs-if2ug', '2', 1),
+('24', '10', '83', '1', 2),
+('25', '11', '83', '2', 1),
+('26', '10', '84', '1', 2),
+('27', '10', '85', '1', 2),
+('28', '10', '86', '1', 2),
+('32', '1', '90', '1', 1),
+('33', '1', '91', '1', 2);
 
 -- --------------------------------------------------------
 
@@ -247,28 +289,59 @@ INSERT INTO `orderdetail` (`orderdetail_id`, `product_id`, `orders_id`, `color_i
 --
 
 CREATE TABLE `orders` (
-  `orders_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `address` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  `note` varchar(250) COLLATE utf8_bin DEFAULT NULL,
+  `orders_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `customer_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `address` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `note` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `total` double DEFAULT NULL,
   `order_code` double DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `employee_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`orders_id`, `customer_id`, `address`, `note`, `total`, `order_code`, `status`, `created_at`, `employee_id`) VALUES
-(83, 1, '34 Hai Bà Trưng', '', 43000000, 12341234, 2, '2022-04-11 11:37:05', NULL),
-(84, 1, '34 Hai Bà Trưng', '', 28000000, 0, 1, '2022-04-11 11:48:01', NULL),
-(85, 1, '34 Hai Bà Trưng', '', 28000000, 0, 1, '2022-04-11 11:51:43', NULL),
-(86, 1, '34 Hai Bà Trưng', '', 28000000, 0, 1, '2022-04-11 11:53:27', NULL),
-(90, 24, '695 xô viết nghệ tĩnh', 'Giao trước 5h chiều nhé shop oy', 15000000, 23423, 2, '2022-04-14 03:40:14', NULL),
-(91, 1, '34 Hai Bà Trưng', 'Giao trước 5h chiều nhé shop oy', 30000000, 23423, 2, '2022-04-14 03:49:21', NULL);
+('20250405-223505-yfnbt-lz28x', '20250405-223051-94guw-mf3kt', 'HCM', '', 30000000, 123456, 2, '2025-04-05 22:35:05', NULL),
+('20250406-205442-0mrzi-a4f9j', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 23231, 2, '2025-04-06 20:54:42', NULL),
+('20250406-223627-ypuzk-bctvh', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 2323, 2, '2025-04-06 22:36:27', NULL),
+('20250406-223917-8zxni-dlbt2', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 435345, 2, '2025-04-06 22:39:17', NULL),
+('20250406-224248-d49yu-zvqxe', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 2343425, 2, '2025-04-06 22:42:48', NULL),
+('20250406-224435-9laeq-t7yon', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 123123121, 2, '2025-04-06 22:44:35', NULL),
+('20250406-224814-bjh8u-v6rcw', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 223, 2, '2025-04-06 22:48:14', NULL),
+('20250406-225103-ahci9-7fgj4', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 22:51:03', NULL),
+('20250406-225230-t0hkg-eso52', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 22:52:30', NULL),
+('20250406-225927-ue97b-awty8', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 456457, 2, '2025-04-06 22:59:27', NULL),
+('20250406-230630-nbdse-3cyxt', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:06:30', NULL),
+('20250406-230652-yr7j3-5pkha', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:06:52', NULL),
+('20250406-230748-qde9v-uyi53', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:07:48', NULL),
+('20250406-230851-peig4-qy537', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:08:51', NULL),
+('20250406-231146-t6i2m-qv30z', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:11:46', NULL),
+('20250406-231202-pq73g-id8ot', '20250405-223051-94guw-mf3kt', 'HCM', '', 30000000, 0, 1, '2025-04-06 23:12:02', NULL),
+('20250406-231643-hqivd-1wj5l', '20250405-223051-94guw-mf3kt', 'HCM', '', 45000000, 0, 1, '2025-04-06 23:16:43', NULL),
+('20250406-232001-ml0or-wa49j', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:20:01', NULL),
+('20250406-232237-cun07-fz6k8', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:22:37', NULL),
+('20250406-232447-im7qg-ocwed', '20250405-223051-94guw-mf3kt', 'HCM', '', 30000000, 0, 1, '2025-04-06 23:24:47', NULL),
+('20250406-233010-zbcyd-gha0i', '20250405-223051-94guw-mf3kt', 'HCM', '', 45000000, 0, 1, '2025-04-06 23:30:10', NULL),
+('20250406-233038-f03sw-yjobp', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:30:38', NULL),
+('20250406-233057-lqnxw-1f28j', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:30:57', NULL),
+('20250406-233748-sdo1z-x8wfe', '20250405-223051-94guw-mf3kt', 'HCM2', '', 30000000, 0, 1, '2025-04-06 23:37:48', NULL),
+('20250406-234130-1aqen-kflbh', '20250405-223051-94guw-mf3kt', 'HCM', '', 15000000, 0, 1, '2025-04-06 23:41:30', NULL),
+('20250406-234328-b38du-6wkh9', '20250405-223051-94guw-mf3kt', 'HCM3', '', 15000000, 0, 1, '2025-04-06 23:43:28', NULL),
+('20250406-234400-e6x9q-w7fj1', '20250405-223051-94guw-mf3kt', 'HCM3', '', 15000000, 0, 1, '2025-04-06 23:44:00', NULL),
+('20250406-234936-n7ay2-gjdh3', '20250405-223051-94guw-mf3kt', 'HCMs1111111', '', 30000000, 30000000, 3, '2025-04-06 23:49:36', NULL),
+('20250406-235322-m8gq1-ar3p6', '20250405-223051-94guw-mf3kt', 'HCM 111', '', 30000000, 30000000, 3, '2025-04-06 23:53:22', NULL),
+('20250406-235736-th8fn-was10', '20250405-223051-94guw-mf3kt', 'HCM new', '', 15000000, 15000000, 3, '2025-04-06 23:57:36', NULL),
+('20250408-223253-z9ms5-k84rl', '20250408-223215-0wuei-3ry8b', 'Tiến hóa, Tuyên Hóa, Quàn Bình', '', 15000000, 0, 1, '2025-04-08 22:32:53', NULL),
+('20250408-223638-p1wuz-tviqc', '20250408-223215-0wuei-3ry8b', 'Tiến hóa, Tuyên Hóa, Quàn Bình', '', 30000000, 0, 1, '2025-04-08 22:36:38', NULL),
+('20250408-223712-4vy1g-i7923', '20250408-223215-0wuei-3ry8b', 'Tiến hóa, Tuyên Hóa, Quàn Bình', '', 15000000, 15000000, 3, '2025-04-08 22:37:12', NULL),
+('20250409-024018-qdhpb-a97i0', '20250409-023851-37nhe-a5vy6', '563 Tô Ngọc Vân,Tam Phú,Thủ Đức', '', 30000000, 30000000, 3, '2025-04-09 02:40:18', NULL),
+('20250409-132004-05c9x-73sgi', '20250409-131400-qy2px-8kboc', 'HCM', '', 15000000, 0, 1, '2025-04-09 13:20:04', NULL),
+('20250409-132434-4w8b7-3sqcm', '20250409-131400-qy2px-8kboc', 'HCM', '', 14300000, 0, 1, '2025-04-09 13:24:34', NULL),
+('20250409-132459-pdnbs-if2ug', '20250409-131400-qy2px-8kboc', 'HCM', '', 14300000, 14300000, 3, '2025-04-09 13:24:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -277,43 +350,28 @@ INSERT INTO `orders` (`orders_id`, `customer_id`, `address`, `note`, `total`, `o
 --
 
 CREATE TABLE `product` (
-  `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `brand_id` int(11) NOT NULL,
-  `name` varchar(200) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `product_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `category_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `brand_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `category_id`, `brand_id`, `name`) VALUES
-(1, 4, 1, 'Macbook Air M1 8/256GB'),
-(2, 3, 1, 'Apple Watch Serial 3'),
-(4, 2, 3, 'Oppo I2'),
-(5, 2, 3, 'Oppo I2'),
-(6, 2, 3, 'Oppo I4'),
-(7, 2, 3, 'Oppo A4'),
-(8, 2, 3, 'Oppo K5'),
-(9, 2, 3, 'Iphone 4 8GB'),
-(10, 1, 1, 'Iphone X 64GB'),
-(11, 1, 1, 'Iphone X 128GB'),
-(12, 1, 1, 'Iphone 12 64GB'),
-(13, 1, 1, 'Iphone 13 Pro 256GB'),
-(14, 1, 1, 'Iphone 13 Mini 128GB'),
-(15, 1, 1, 'Iphone 12 Pro 64GB'),
-(16, 1, 1, 'Iphone 11 Pro 128GB'),
-(17, 1, 1, 'Iphone XS MAX 128GB '),
-(18, 1, 1, 'Iphone 7 Plus 64GB'),
-(19, 1, 1, 'Iphone 8 32GB'),
-(20, 3, 2, 'Samsung Galaxy Watch Active'),
-(22, 3, 2, 'Samsung Galaxy Watch Active'),
-(26, 5, 1, 'Bàn phím Apple \nMagic Keyboard'),
-(27, 5, 1, 'Bàn phím Apple \nMagic Keyboard'),
-(28, 5, 1, 'Chuột Apple Magic Mouse 2'),
-(29, 5, 1, 'Tai nghe Airpods 3'),
-(30, 5, 1, 'Cáp sạc'),
-(31, 1, 1, 'Iphone Xs Max 16GB');
+INSERT INTO `product` (`product_id`, `category_id`, `brand_id`, `name`, `create_at`) VALUES
+('12', '1', '1', 'Iphone 12 64GB', NULL),
+('14', '1', '1', 'Iphone 13 Mini 128GB', NULL),
+('15', '1', '1', 'Iphone 12 Pro 64GB', NULL),
+('17', '1', '1', 'Iphone XS MAX 128GB ', NULL),
+('20', '3', '2', 'Samsung Galaxy Watch Active', NULL),
+('28', '5', '1', 'Chuột Apple Magic Mouse 2', NULL),
+('29', '5', '1', 'Tai nghe Airpods 3', NULL),
+('30', '5', '1', 'Cáp sạc', NULL),
+('6BPLYI', '1', '20250409-020107-avlb3-8ods0', 'demo xiaomi111111111111111', NULL),
+('9', '2', '3', 'Iphone 4 8GB', NULL);
 
 -- --------------------------------------------------------
 
@@ -322,17 +380,17 @@ INSERT INTO `product` (`product_id`, `category_id`, `brand_id`, `name`) VALUES
 --
 
 CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL,
-  `role` varchar(100) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `role_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `role` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`role_id`, `role`) VALUES
-(1, 'admin'),
-(2, 'staff');
+('1', 'admin'),
+('2', 'staff');
 
 -- --------------------------------------------------------
 
@@ -341,47 +399,50 @@ INSERT INTO `role` (`role_id`, `role`) VALUES
 --
 
 CREATE TABLE `storehouse` (
-  `storehouse_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `color_id` int(11) NOT NULL,
+  `storehouse_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `product_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `color_id` varchar(253) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `price` double DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8_bin NOT NULL,
-  `description` varchar(250) COLLATE utf8_bin DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `description` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `create_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 --
 -- Dumping data for table `storehouse`
 --
 
 INSERT INTO `storehouse` (`storehouse_id`, `product_id`, `color_id`, `price`, `quantity`, `image`, `description`, `create_at`) VALUES
-(1, 1, 4, 15000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:40:40'),
-(2, 2, 1, 15000000, 100, 'aoole-watch-s3.jpg', 'Hàng like new 99%', '2022-04-07 21:41:30'),
-(3, 2, 1, 15000000, 50, 'aoole-watch-s3.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
-(4, 1, 1, 15000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
-(5, 1, 1, 15000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
-(6, 1, 1, 15000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
-(7, 1, 1, 15000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
-(8, 19, 2, 15000000, 100, 'apple-iphone-8-plus-64gb.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
-(9, 19, 2, 15000000, 100, 'apple-iphone-8-plus-64gb.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
-(10, 20, 2, 15000000, 100, 'samsung-galaxy-watch-active.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
-(11, 17, 4, 15000000, 100, 'iphone-xsmax.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
-(12, 15, 3, 15000000, 100, 'iphone-12-pro-128gb.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
-(13, 14, 2, 15000000, 100, 'iphone-13-mini-128gb.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
-(14, 13, 1, 15000000, 100, 'iphone-13-pro.jpg', 'Hàng like new 99%', NULL),
-(15, 13, 1, 15000000, 100, 'iphone-13-pro.jpg', 'Hàng like new 99%', NULL),
-(16, 12, 3, 15000000, 100, 'iPhone-12-64GB.jpg', 'Hàng like new 99%', NULL),
-(17, 11, 2, 15000000, 100, 'iphone-x-64gb.jpg', 'Hàng like new 99%', NULL),
-(18, 10, 4, 15000000, 100, 'iphone-x-64gb.jpg', 'Hàng like new 99%', NULL),
-(19, 9, 2, 15000000, 100, 'iphone-4.jpg', 'Hàng like new 99%', NULL),
-(20, 27, 4, 15000000, 50, 'MagicKeyboard.jpg', 'Chính hãng 100%', NULL),
-(21, 27, 4, 15000000, 50, 'MagicKeyboard.jpg', 'Chính hãng 100%', NULL),
-(22, 28, 2, 15000000, 50, 'MagicMouse2.jpg', 'Chính hãng 100%', NULL),
-(23, 29, 1, 15000000, 50, 'Apple-AirPods-3.jpg', 'Chính hãng 100%', NULL),
-(24, 30, 1, 15000000, 50, 'capsac.jpg', 'Chính hãng 100%', NULL),
-(25, 10, 1, 14000000, 10, 'iphone-x-64gb.jpg', 'Hàng like new', '2022-04-09 05:18:34'),
-(26, 1, 2, 34000000, 16, 'macbook-air-m1.jpg', 'Hàng like new', '2022-04-09 05:25:24');
+('1', '1', '4', 12000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:40:40'),
+('10', '20', '2', 15000000, 100, 'samsung-galaxy-watch-active.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
+('11', '17', '4', 15000000, 100, 'iphone-xsmax.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
+('12', '15', '3', 15000000, 100, 'iphone-12-pro-128gb.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
+('13', '14', '2', 14300000, 100, 'iphone-13-mini-128gb.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
+('14', '13', '1', 15000000, 100, 'iphone-13-pro.jpg', 'Hàng like new 99%', NULL),
+('15', '13', '1', 15000000, 100, 'iphone-13-pro.jpg', 'Hàng like new 99%', NULL),
+('16', '12', '3', 15000000, 100, 'iPhone-12-64GB.jpg', 'Hàng like new 99%', NULL),
+('17', '11', '2', 15000000, 100, 'iphone-x-64gb.jpg', 'Hàng like new 99%', NULL),
+('18', '10', '4', 15000000, 100, 'iphone-x-64gb.jpg', 'Hàng like new 99%', NULL),
+('19', '9', '2', 18990000, 100, 'iphone-4.jpg', 'Hàng like new 99%', NULL),
+('2', '2', '1', 4700000, 100, 'aoole-watch-s3.jpg', 'Hàng like new 99%', '2022-04-07 21:41:30'),
+('20', '27', '4', 15000000, 50, 'MagicKeyboard.jpg', 'Chính hãng 100%', NULL),
+('20250408-233728-d7ect-bnp6q', '8', '1', 0, 0, '1263_tải xuống.jpg', '', '2025-04-08 23:37:28'),
+('20250409-021121-svh9x-my6oc', '11', '1', 12000000, 0, '1331_', '', '2025-04-09 02:11:21'),
+('21', '27', '4', 15000000, 50, 'MagicKeyboard.jpg', 'Chính hãng 100%', NULL),
+('22', '28', '2', 2000000, 50, 'MagicMouse2.jpg', 'Chính hãng 100%', NULL),
+('23', '29', '1', 3590000, 50, 'Apple-AirPods-3.jpg', 'Chính hãng 100%', NULL),
+('24', '30', '1', 600000, 50, 'capsac.jpg', 'Chính hãng 100%', NULL),
+('25', '10', '1', 14000000, 10, 'iphone-x-64gb.jpg', 'Hàng like new', '2022-04-09 05:18:34'),
+('26', '1', '2', 34000000, 16, 'macbook-air-m1.jpg', 'Hàng like new', '2022-04-09 05:25:24'),
+('3', '2', '1', 4700000, 50, 'aoole-watch-s3.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
+('4', '1', '1', 15000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
+('4MLGTB', '6BPLYI', '1', 400444, 10, 'Xiaomi 14T Pro 12GB 512GB.webp', '324234234', '2025-04-09 06:01:57'),
+('5', '1', '1', 15000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
+('6', '1', '1', 15000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
+('7', '1', '1', 15000000, 50, 'macbook-air-m1.jpg', 'Hàng chính hãng 100%', '2022-04-07 21:44:07'),
+('8', '19', '2', 15000000, 100, 'apple-iphone-8-plus-64gb.jpg', 'Hàng like new', '2022-04-06 22:00:10'),
+('9', '19', '2', 15000000, 100, 'apple-iphone-8-plus-64gb.jpg', 'Hàng like new', '2022-04-06 22:00:10');
 
 --
 -- Indexes for dumped tables
@@ -416,13 +477,16 @@ ALTER TABLE `color`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `feedback_id` (`feedback_id`);
+  ADD KEY `FK_comment_customer_customer_id` (`customer_id`),
+  ADD KEY `FK_product_id` (`product_id`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`customer_id`);
+  ADD PRIMARY KEY (`customer_id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `phone` (`phone`);
 
 --
 -- Indexes for table `employee`
@@ -436,14 +500,14 @@ ALTER TABLE `employee`
 --
 ALTER TABLE `feedback`
   ADD PRIMARY KEY (`feedback_id`),
-  ADD KEY `customer_id` (`customer_id`);
+  ADD KEY `FK_feedback_customer_customer_id` (`customer_id`);
 
 --
 -- Indexes for table `liked`
 --
 ALTER TABLE `liked`
-  ADD KEY `customer_id` (`customer_id`),
-  ADD KEY `feedback_id` (`feedback_id`);
+  ADD KEY `FK_liked_customer_customer_id` (`customer_id`),
+  ADD KEY `FK_liked_feedback_feedback_id` (`feedback_id`);
 
 --
 -- Indexes for table `orderdetail`
@@ -451,8 +515,8 @@ ALTER TABLE `liked`
 ALTER TABLE `orderdetail`
   ADD PRIMARY KEY (`orderdetail_id`),
   ADD KEY `product_id` (`product_id`),
-  ADD KEY `orders_id` (`orders_id`),
-  ADD KEY `color_id` (`color_id`);
+  ADD KEY `color_id` (`color_id`),
+  ADD KEY `FK_orderdetail_orders_orders_id` (`orders_id`);
 
 --
 -- Indexes for table `orders`
@@ -467,8 +531,8 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
-  ADD KEY `brand_id` (`brand_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `brand_id` (`brand_id`);
 
 --
 -- Indexes for table `role`
@@ -481,149 +545,25 @@ ALTER TABLE `role`
 --
 ALTER TABLE `storehouse`
   ADD PRIMARY KEY (`storehouse_id`),
-  ADD KEY `color_id` (`color_id`),
-  ADD KEY `product_id` (`product_id`) USING BTREE;
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `banner`
---
-ALTER TABLE `banner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `brand`
---
-ALTER TABLE `brand`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `color`
---
-ALTER TABLE `color`
-  MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `comment`
---
-ALTER TABLE `comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `employee`
---
-ALTER TABLE `employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `feedback`
---
-ALTER TABLE `feedback`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `orderdetail`
---
-ALTER TABLE `orderdetail`
-  MODIFY `orderdetail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
-
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
---
--- AUTO_INCREMENT for table `role`
---
-ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `storehouse`
---
-ALTER TABLE `storehouse`
-  MODIFY `storehouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `color_id` (`color_id`);
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `comment`
---
-ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`feedback_id`) REFERENCES `feedback` (`feedback_id`);
-
---
--- Constraints for table `employee`
---
-ALTER TABLE `employee`
-  ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
-
---
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
-  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  ADD CONSTRAINT `feedback_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `orders` (`customer_id`);
+  ADD CONSTRAINT `FK_feedback_customer_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
 
 --
 -- Constraints for table `liked`
 --
 ALTER TABLE `liked`
-  ADD CONSTRAINT `liked_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  ADD CONSTRAINT `liked_ibfk_2` FOREIGN KEY (`feedback_id`) REFERENCES `feedback` (`feedback_id`);
-
---
--- Constraints for table `orderdetail`
---
-ALTER TABLE `orderdetail`
-  ADD CONSTRAINT `orderdetail_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `storehouse` (`product_id`),
-  ADD CONSTRAINT `orderdetail_ibfk_2` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`orders_id`),
-  ADD CONSTRAINT `orderdetail_ibfk_3` FOREIGN KEY (`color_id`) REFERENCES `storehouse` (`color_id`);
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`);
-
---
--- Constraints for table `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`brand_id`),
-  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
-
---
--- Constraints for table `storehouse`
---
-ALTER TABLE `storehouse`
-  ADD CONSTRAINT `storehouse_ibfk_1` FOREIGN KEY (`color_id`) REFERENCES `color` (`color_id`),
-  ADD CONSTRAINT `storehouse_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+  ADD CONSTRAINT `FK_liked_customer_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
+  ADD CONSTRAINT `FK_liked_feedback_feedback_id` FOREIGN KEY (`feedback_id`) REFERENCES `feedback` (`feedback_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
